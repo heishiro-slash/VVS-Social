@@ -9,4 +9,4 @@ Engadir ao repositorio un ficheiro README que indique, como mínimo: (a) o nome d
 Engadir a dirección do repositorio GitHub á seguinte táboa (achegando filas segundo sexa necesario):
 
 Diagrama de clases actualizado:
-![alt tag](https://cdn.rawgit.com/heishiro-slash/VVS-Social/master/diagrama.pdf)
+![alt tag](https://cdn.rawgit.com/heishiro-slash/VVS-Social/master/diagrama.svg)
