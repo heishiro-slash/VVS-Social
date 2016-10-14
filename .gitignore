@@ -25,6 +25,7 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+manifest.mf
 
 # Class Files #
 *.class
