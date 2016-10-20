@@ -50,11 +50,17 @@ public class GestorMuroTest {
     public void tearDown() {
     }
 
-
+    @Test
+    public void testGetInstance() {
+        System.out.println("getInstance");
+        GestorMuro expResult = gestorMuro;
+        GestorMuro result = GestorMuro.getInstance();
+        assertEquals(expResult, result);
+    }
     /**
      * Test of getMuro method, of class GestorMuro.
      */
-    @Test (expected = NonUserException.class)
+    @Test (expected = InvalidUserException.class)
         public void testGetMuro() {
         System.out.println("getMuro");
         Usuario usuario = null;
