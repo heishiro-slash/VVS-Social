@@ -5,6 +5,7 @@
  */
 package joinme.modelo.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 import joinme.controlador.ControladorLogin;
 import org.junit.After;
@@ -123,74 +124,134 @@ public class GestorUsuarioTest {
 
     /**
      * Test of buscarUsuario method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-011
      */
     @Test
     public void testBuscarUsuario() {
         System.out.println("buscarUsuario");
-        String nombre = "";
-        String ap1 = "";
-        String ap2 = "";
-        GestorUsuario instance = null;
-        List<Usuario> expResult = null;
-        List<Usuario> result = instance.buscarUsuario(nombre, ap1, ap2);
+        GestorUsuario gu = GestorUsuario.getInstance();
+        String nombre = "Eduardo";
+        String ap1 = "Gomez";
+        String ap2 = "Gomez";
+        Usuario user = gu.getUsuario("Eduardo");
+        List<Usuario> expResult= new ArrayList();
+        expResult.add(user);
+        List<Usuario> result = gu.buscarUsuario(nombre, ap1, ap2);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    /**
+     * Test of buscarUsuario method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-012
+     */
+    @Test
+    public void testBuscarUsuarioNoExistente() {
+        System.out.println("buscarUsuarioNoExistente");
+        GestorUsuario gu = GestorUsuario.getInstance();
+        String nombre = "Pepito";
+        String ap1 = "Gomez";
+        String ap2 = "Gomez";
+        List<Usuario> expResult= new ArrayList();
+        List<Usuario> result = gu.buscarUsuario(nombre, ap1, ap2);
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of aceptarSolicitud method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-013
      */
-    @Test
+    @Test(expected = InvalidSolicitudException.class)
     public void testAceptarSolicitud() {
         System.out.println("aceptarSolicitud");
+        GestorUsuario gu = GestorUsuario.getInstance();
         Solicitud s = null;
-        GestorUsuario instance = null;
-        instance.aceptarSolicitud(s);
+        gu.aceptarSolicitud(s);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
      * Test of rechazarSolicitud method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-014
      */
-    @Test
+    @Test(expected = InvalidSolicitudException.class)
     public void testRechazarSolicitud() {
         System.out.println("rechazarSolicitud");
         Solicitud s = null;
-        GestorUsuario instance = null;
-        instance.rechazarSolicitud(s);
+        GestorUsuario gu = GestorUsuario.getInstance();
+        gu.rechazarSolicitud(s);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    /**
+     * Test of verAmigos method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-015
+     */
+    @Test(expected = InvalidUserException.class)
+    public void testVerAmigosInvalidUser() {
+        System.out.println("verAmigos");
+        GestorUsuario gu = GestorUsuario.getInstance();
+        Usuario usuario = null;
+        gu.verAmigos(usuario);
     }
 
     /**
      * Test of verAmigos method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-016
      */
     @Test
     public void testVerAmigos() {
         System.out.println("verAmigos");
-        Usuario usuario = null;
-        GestorUsuario instance = null;
-        List<Usuario> expResult = null;
-        List<Usuario> result = instance.verAmigos(usuario);
+        GestorUsuario gu = GestorUsuario.getInstance();
+        Usuario usuario = gu.getUsuario("Victor");
+        Usuario amigo1 = gu.getUsuario("Tino");
+        Usuario amigo2 = gu.getUsuario("Aba");
+        List<Usuario> expResult = new ArrayList();
+        expResult.add(amigo1);
+        expResult.add(amigo2);
+        List<Usuario> result = gu.verAmigos(usuario);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    /**
+     * Test of verAmigos method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-017
+     */
+    @Test
+    public void testVerAmigosSinAmigos() {
+        System.out.println("verAmigos");
+        GestorUsuario gu = GestorUsuario.getInstance();
+        Usuario usuario = gu.getUsuario("Eduardo");
+        List<Usuario> expResult = new ArrayList();
+        List<Usuario> result = gu.verAmigos(usuario);
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of anadirAmigo method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-018
      */
-    @Test
-    public void testAnadirAmigo() {
+    @Test(expected = InvalidUserException.class)
+    public void testAnadirAmigoUsuarioInvalido() {
         System.out.println("anadirAmigo");
+        GestorUsuario gu = GestorUsuario.getInstance();
         Usuario usuario = null;
         String alias = "";
-        GestorUsuario instance = null;
-        instance.anadirAmigo(usuario, alias);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        gu.anadirAmigo(usuario, alias);
+    }
+    
+    /**
+     * Test of anadirAmigo method, of class GestorUsuario.
+     * Caso de prueba: PR-UN-019
+     */
+    @Test(expected = InvalidUserException.class)
+    public void testAnadirAmigoAliasInvalido() {
+        System.out.println("anadirAmigo");
+        GestorUsuario gu = GestorUsuario.getInstance();
+        Usuario usuario = null;
+        String alias = "";
+        gu.anadirAmigo(usuario, alias);
     }
     
 }

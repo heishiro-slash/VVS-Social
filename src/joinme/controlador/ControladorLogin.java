@@ -57,8 +57,6 @@ public class ControladorLogin {
             uFaustino.registrarAmistad(uVictor);
             uFaustino.registrarAmistad(uEsteban);
             uJose.registrarAmistad(uEsteban);
-            uJose.registrarAmistad(uEduardo);
-            uEduardo.registrarAmistad(uJose);
             GestorMuro.getInstance().publicarEntrada(uEsteban, "Mesaje de Esteban", null, "Tecnologia", "Amigos");
             GestorMuro.getInstance().publicarEntrada(uEsteban, "Mesaje de Esteban2", null, "Humor", "Publico");
             GestorMuro.getInstance().publicarEntrada(uVictor, "Mesaje de Victor", null, "Tecnologia", "Amigos");
