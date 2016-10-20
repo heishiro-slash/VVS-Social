@@ -245,7 +245,7 @@ public class GestorUsuarioTest {
      * Test of anadirAmigo method, of class GestorUsuario.
      * Caso de prueba: PR-UN-019
      */
-    @Test(expected = InvalidUserException.class)
+    @Test(expected = InvalidAliasException.class)
     public void testAnadirAmigoAliasInvalido() {
         System.out.println("anadirAmigo");
         GestorUsuario gu = GestorUsuario.getInstance();
