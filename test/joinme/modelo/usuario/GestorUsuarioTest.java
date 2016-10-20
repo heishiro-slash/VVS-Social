@@ -132,6 +132,15 @@ public class GestorUsuarioTest {
      * Test of buscarUsuario method, of class GestorUsuario.
      * Caso de prueba: PR-UN-011
      */
+    @Test (expected = EmptyStringException.class)
+    public void testBuscarUsuarioEmpty() {
+        controlador.creacionDatos ("Eduardo");
+        System.out.println("buscarUsuario");
+        String nombre = "";
+        String ap1 = "";
+        String ap2 = "";
+         gestorUsuario.buscarUsuario(nombre, ap1, ap2);
+    }
     @Test
     public void testBuscarUsuario() {
         controlador.creacionDatos ("Eduardo");
