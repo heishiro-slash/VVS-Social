@@ -10,4 +10,4 @@ Permite engadir amigos, publicar no muro, ver as últimas actualizacións e face
 Para a creación do proxecto utilizouse Netbeans xunto coa librería de Swing.
 
 Diagrama de clases actualizado:
-![alt tag](https://rawgit.com/heishiro-slash/VVS-Social/master/diagrama.svg)
+![alt tag](https://rawgit.com/heishiro-slash/VVS-Social/master/doc/classDiagram.svg)
