@@ -1,5 +1,6 @@
 package joinme.modelo.usuario;
 
+import exceptions.InvalidSolicitudException;
 import java.util.ArrayList;
 import java.util.List;
 import joinme.modelo.muro.Evento;
@@ -61,7 +62,8 @@ public class GestorUsuario {
         return listaUsuarios;
     }
     
-    public void aceptarSolicitud(Solicitud s){
+    public void aceptarSolicitud(Solicitud s) throws InvalidSolicitudException{
+    
         Usuario solicitado = s.getSolicitado();
         Usuario solicitante = s.getSolicitante();
         solicitado.aceptarSolicitud(s);

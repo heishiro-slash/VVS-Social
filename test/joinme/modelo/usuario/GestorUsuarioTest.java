@@ -5,6 +5,7 @@
  */
 package joinme.modelo.usuario;
 
+import exceptions.InvalidSolicitudException;
 import java.util.ArrayList;
 import java.util.List;
 import joinme.controlador.ControladorLogin;
