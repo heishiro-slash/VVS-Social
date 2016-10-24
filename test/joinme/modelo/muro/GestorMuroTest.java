@@ -5,6 +5,8 @@
  */
 package joinme.modelo.muro;
 
+import exceptions.EmptyStringException;
+import exceptions.InvalidUserException;
 import joinme.controlador.ControladorLogin;
 import joinme.modelo.usuario.GestorUsuario;
 import joinme.modelo.usuario.Usuario;
@@ -20,13 +22,14 @@ import static org.junit.Assert.*;
  * @author Admin
  */
 public class GestorMuroTest {
-    
+
     private ControladorLogin controlador;
     private GestorMuro gestorMuro;
     private GestorUsuario gestorUsuario;
     private Usuario usuario;
+
     public GestorMuroTest() {
-        
+
     }
 
     @BeforeClass
@@ -39,8 +42,8 @@ public class GestorMuroTest {
 
     @Before
     public void setUp() {
-        controlador  = new ControladorLogin();
-        controlador.creacionDatos ("Eduardo");
+        controlador = new ControladorLogin();
+        controlador.creacionDatos("Eduardo");
         gestorMuro = GestorMuro.getInstance();
         gestorUsuario = GestorUsuario.getInstance();
         usuario = gestorUsuario.getUsuario("Eduardo");
@@ -57,11 +60,12 @@ public class GestorMuroTest {
         GestorMuro result = GestorMuro.getInstance();
         assertEquals(expResult, result);
     }
+
     /**
      * Test of getMuro method, of class GestorMuro.
      */
-    @Test (expected = InvalidUserException.class)
-        public void testGetMuro() {
+    @Test(expected = InvalidUserException.class)
+    public void testGetMuro() {
         System.out.println("getMuro");
         Usuario usuario = null;
         Muro result = gestorMuro.getMuro(usuario);
@@ -70,8 +74,8 @@ public class GestorMuroTest {
     /**
      * Test of publicarEntrada method, of class GestorMuro.
      */
-    @Test  (expected = EmptyStringException.class)
-        public void testPublicarEntrada_Usuario_String() {
+    @Test(expected = EmptyStringException.class)
+    public void testPublicarEntrada_Usuario_String() {
         System.out.println("publicarEntrada");
         String mensaje = "";
         gestorMuro.publicarEntrada(usuario, mensaje);
@@ -80,15 +84,15 @@ public class GestorMuroTest {
     /**
      * Test of publicarEntrada method, of class GestorMuro.
      */
-    @Test  (expected = EmptyStringException.class)
-        public void testPublicarEntrada_5args() {
+    @Test(expected = EmptyStringException.class)
+    public void testPublicarEntrada_5args() {
         System.out.println("publicarEntrada");
         String mensaje = "";
         String media = "";
         String categoria = "";
         String visibilidad = "";
         gestorMuro.publicarEntrada(usuario, mensaje, media, categoria, visibilidad);
-        
+
     }
-    
+
 }

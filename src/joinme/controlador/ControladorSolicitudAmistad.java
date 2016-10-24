@@ -5,8 +5,11 @@
  */
 package joinme.controlador;
 
+import exceptions.InvalidSolicitudException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import joinme.GUI.PagPrincipal;
 import joinme.GUI.SolicitudAmistad;
@@ -19,8 +22,9 @@ import joinme.modelo.usuario.Usuario;
  * @author esteban
  */
 public class ControladorSolicitudAmistad {
+
     public void ControladorSolicitudAmistad() {
-        
+
     }
 
     public String getAlias(Usuario usuario) {
@@ -28,28 +32,32 @@ public class ControladorSolicitudAmistad {
     }
 
     public List<String> getSolicitudes(Usuario usuario) {
-        List <Solicitud> solicitudes;
-        List <String> modelo1 = new ArrayList();
-        
+        List<Solicitud> solicitudes;
+        List<String> modelo1 = new ArrayList();
+
         solicitudes = usuario.getSolicitudes();
-        if(!solicitudes.isEmpty()){
-            for(Solicitud s:solicitudes){
-                if(s.getEstado().equals("Pendiente")) {
+        if (!solicitudes.isEmpty()) {
+            for (Solicitud s : solicitudes) {
+                if (s.getEstado().equals("Pendiente")) {
                     modelo1.add(s.getSolicitante().getAlias());
                 }
             }
-            
+
         }
         return modelo1;
     }
 
     public void aceptarSolicitud(Usuario usuario, String solicitudSeleccionada, SolicitudAmistad aThis) {
         Usuario u = GestorUsuario.getInstance().getUsuario(usuario.getAlias());
-        List <Solicitud> s  = u.getSolicitudes();
-        for(Solicitud solicitud:s){
-            if(solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
+        List<Solicitud> s = u.getSolicitudes();
+        for (Solicitud solicitud : s) {
+            if (solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
                 if (solicitud.getEstado().equals("Pendiente")) {
-                    GestorUsuario.getInstance().aceptarSolicitud(solicitud);
+                    try {
+                        GestorUsuario.getInstance().aceptarSolicitud(solicitud);
+                    } catch (InvalidSolicitudException ex) {
+                        Logger.getLogger(ControladorSolicitudAmistad.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     //solicitud.setEstado("Aceptada");
                     JOptionPane.showMessageDialog(aThis, "Ahora eres amigo de: " + solicitud.getSolicitante().getAlias());
                 }
@@ -59,9 +67,9 @@ public class ControladorSolicitudAmistad {
 
     public void rechazarSolicitud(Usuario usuario, String solicitudSeleccionada) {
         Usuario u = GestorUsuario.getInstance().getUsuario(usuario.getAlias());
-        List <Solicitud> s  = u.getSolicitudes();
-        for(Solicitud solicitud:s){
-            if(solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
+        List<Solicitud> s = u.getSolicitudes();
+        for (Solicitud solicitud : s) {
+            if (solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
                 if (solicitud.getEstado().equals("Pendiente")) {
                     GestorUsuario.getInstance().rechazarSolicitud(solicitud);
                     //solicitud.setEstado("Rechazada");

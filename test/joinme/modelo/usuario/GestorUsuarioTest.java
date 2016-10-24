@@ -5,7 +5,9 @@
  */
 package joinme.modelo.usuario;
 
+import exceptions.EmptyStringException;
 import exceptions.InvalidSolicitudException;
+import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
 import joinme.controlador.ControladorLogin;
