@@ -1,5 +1,7 @@
 package joinme.modelo.usuario;
 
+import exceptions.EmptyStringException;
+import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -99,7 +101,7 @@ public class Usuario {
     public void comprobarAcceso(){   
     }
     
-    public void registrarAmistad(Usuario usuario){
+    public void registrarAmistad(Usuario usuario) throws InvalidUserException, EmptyStringException{
         GestorMuro.getInstance().publicarEntrada(this, alias + " ahora es amigo de " + usuario.getAlias());
         amigos.add(usuario);
     }

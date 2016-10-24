@@ -5,6 +5,10 @@
  */
 package joinme.GUI;
 
+import exceptions.EmptyStringException;
+import exceptions.InvalidUserException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import joinme.controlador.ControladorLogin;
 
 /**
@@ -21,7 +25,13 @@ public class Login extends javax.swing.JFrame {
         controlador = new ControladorLogin();
         initComponents();
         
-        controlador.creacionDatos(usuarioDefecto);
+        try {
+            controlador.creacionDatos(usuarioDefecto);
+        } catch (InvalidUserException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (EmptyStringException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 

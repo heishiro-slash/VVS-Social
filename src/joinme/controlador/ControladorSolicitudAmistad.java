@@ -5,7 +5,9 @@
  */
 package joinme.controlador;
 
+import exceptions.EmptyStringException;
 import exceptions.InvalidSolicitudException;
+import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,7 +56,13 @@ public class ControladorSolicitudAmistad {
             if (solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
                 if (solicitud.getEstado().equals("Pendiente")) {
                     try {
-                        GestorUsuario.getInstance().aceptarSolicitud(solicitud);
+                        try {
+                            GestorUsuario.getInstance().aceptarSolicitud(solicitud);
+                        } catch (InvalidUserException ex) {
+                            Logger.getLogger(ControladorSolicitudAmistad.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (EmptyStringException ex) {
+                            Logger.getLogger(ControladorSolicitudAmistad.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } catch (InvalidSolicitudException ex) {
                         Logger.getLogger(ControladorSolicitudAmistad.class.getName()).log(Level.SEVERE, null, ex);
                     }

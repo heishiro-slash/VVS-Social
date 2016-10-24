@@ -5,7 +5,11 @@
  */
 package joinme.controlador;
 
+import exceptions.EmptyStringException;
+import exceptions.InvalidUserException;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import joinme.GUI.ElegirArchivo;
 import joinme.GUI.Perfil;
@@ -24,10 +28,16 @@ public class ControladorPublicarEntrada {
     }
     
     public void publicarEntrada(Usuario usuario, String mensaje, String media, String categoria, String visibilidad, PublicarEntrada aThis) {
-        GestorMuro.getInstance().publicarEntrada(usuario, mensaje, media, categoria, visibilidad);
-        Perfil perfil = new Perfil(usuario,usuario);
-        perfil.setVisible(true);
-        aThis.dispose();
+        try {
+            GestorMuro.getInstance().publicarEntrada(usuario, mensaje, media, categoria, visibilidad);
+            Perfil perfil = new Perfil(usuario,usuario);
+            perfil.setVisible(true);
+            aThis.dispose();
+        } catch (InvalidUserException ex) {
+            Logger.getLogger(ControladorPublicarEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (EmptyStringException ex) {
+            Logger.getLogger(ControladorPublicarEntrada.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void elegirArchivo(Usuario usuario, PublicarEntrada aThis) {

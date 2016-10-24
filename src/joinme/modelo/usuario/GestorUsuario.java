@@ -1,6 +1,8 @@
 package joinme.modelo.usuario;
 
+import exceptions.EmptyStringException;
 import exceptions.InvalidSolicitudException;
+import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
 import joinme.modelo.muro.Evento;
@@ -62,7 +64,7 @@ public class GestorUsuario {
         return listaUsuarios;
     }
     
-    public void aceptarSolicitud(Solicitud s) throws InvalidSolicitudException{
+    public void aceptarSolicitud(Solicitud s) throws InvalidSolicitudException, InvalidUserException, EmptyStringException{
     
         Usuario solicitado = s.getSolicitado();
         Usuario solicitante = s.getSolicitante();
@@ -82,7 +84,7 @@ public class GestorUsuario {
     
     
     //Funcion solo necesaria para meter datos
-    public void anadirAmigo(Usuario usuario, String alias){
+    public void anadirAmigo(Usuario usuario, String alias) throws InvalidUserException, EmptyStringException{
         if(existeUsuario(alias)){
             Usuario amigo = getUsuario(alias);
             if(!usuario.esAmigo(amigo)){

@@ -5,8 +5,11 @@
  */
 package joinme.controlador;
 
+import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import joinme.GUI.ListaAmigos;
 import joinme.GUI.Login;
@@ -26,46 +29,53 @@ import joinme.modelo.usuario.Usuario;
  * @author esteban
  */
 public class ControladorPerfil {
-    public ControladorPerfil() {
-        
-    }
-    
-    public List<String> getEventos(Usuario usuario, Usuario usuarioConsultado) {
-        Muro muro = GestorMuro.getInstance().getMuro(usuario);
-        List<Evento> eventos = muro.getEventos();
-        List <String> modelo1 = new ArrayList();
-        Entrada entrada;
 
-        for(Evento e:eventos) {
-            if(e instanceof Entrada){
-                entrada = (Entrada) e;
-                if(entrada.getVisibilidad().equals("Privado")&&usuarioConsultado.equals(usuario)){
-                        modelo1.add(entrada.getFecha().getTime().toString()+" - "+entrada.getCategoria()+" - "+entrada.getVisibilidad()+" - "+entrada.getMensaje()+" - "+entrada.getMedia());
+    public ControladorPerfil() {
+
+    }
+
+    public List<String> getEventos(Usuario usuario, Usuario usuarioConsultado) {
+        List<String> modelo1 = new ArrayList();
+        Entrada entrada;
+        try {
+            Muro muro = GestorMuro.getInstance().getMuro(usuario);
+            List<Evento> eventos = muro.getEventos();
+
+            for (Evento e : eventos) {
+                if (e instanceof Entrada) {
+                    entrada = (Entrada) e;
+                    if (entrada.getVisibilidad().equals("Privado") && usuarioConsultado.equals(usuario)) {
+                        modelo1.add(entrada.getFecha().getTime().toString() + " - " + entrada.getCategoria() + " - " + entrada.getVisibilidad() + " - " + entrada.getMensaje() + " - " + entrada.getMedia());
+                    }
+                    if (entrada.getVisibilidad().equals("Amigos") && (usuarioConsultado.esAmigo(usuario) || usuarioConsultado.equals(usuario))) {
+                        modelo1.add(entrada.getFecha().getTime().toString() + " - " + entrada.getCategoria() + " - " + entrada.getVisibilidad() + " - " + entrada.getMensaje() + " - " + entrada.getMedia());
+                    }
+                    if (entrada.getVisibilidad().equals("Publico") || entrada.getVisibilidad().equals("Circulos")) {
+                        modelo1.add(entrada.getFecha().getTime().toString() + " - " + entrada.getCategoria() + " - " + entrada.getVisibilidad() + " - " + entrada.getMensaje() + " - " + entrada.getMedia());
+                    }
+
+                } else {
+                    modelo1.add(e.getFecha().getTime().toString() + " - " + e.getMensaje());
                 }
-                if(entrada.getVisibilidad().equals("Amigos")&&(usuarioConsultado.esAmigo(usuario)||usuarioConsultado.equals(usuario))){
-                        modelo1.add(entrada.getFecha().getTime().toString()+" - "+entrada.getCategoria()+" - "+entrada.getVisibilidad()+" - "+entrada.getMensaje()+" - "+entrada.getMedia());
-                }
-                if(entrada.getVisibilidad().equals("Publico") || entrada.getVisibilidad().equals("Circulos")){
-                        modelo1.add(entrada.getFecha().getTime().toString()+" - "+entrada.getCategoria()+" - "+entrada.getVisibilidad()+" - "+entrada.getMensaje()+" - "+entrada.getMedia());
-                }
-                        
             }
-            else
-                modelo1.add(e.getFecha().getTime().toString()+" - "+e.getMensaje());
+        } catch (InvalidUserException ex) {
+            Logger.getLogger(ControladorPerfil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return modelo1;
+
     }
-    
+
     public List<String> getListaNoAmigos(Usuario usuario) {
-        List <String> modelo2 = new ArrayList();
+        List<String> modelo2 = new ArrayList();
         List<Usuario> usuarios = GestorUsuario.getInstance().getUsuarios();
-        for (Usuario u:usuarios){
-            if(!usuario.esAmigo(u)&&!usuario.equals(u))
+        for (Usuario u : usuarios) {
+            if (!usuario.esAmigo(u) && !usuario.equals(u)) {
                 modelo2.add(u.getAlias());
+            }
         }
-        return modelo2;        
+        return modelo2;
     }
-    
+
     public String getAlias(Usuario usuario) {
         return usuario.getAlias();
     }
@@ -88,18 +98,18 @@ public class ControladorPerfil {
 
     public void getPerfil(String alias, Usuario usuario, Perfil aThis) {
         Usuario u = GestorUsuario.getInstance().getUsuario(alias);
-            Perfil perfil = new Perfil(usuario,u);
-            perfil.setVisible(true);
-            aThis.dispose();
+        Perfil perfil = new Perfil(usuario, u);
+        perfil.setVisible(true);
+        aThis.dispose();
     }
 
     public void enviarSolicitud(Usuario usuario, Usuario usuarioConsultado, Perfil aThis) {
-        usuarioConsultado.addSolicitud(new Solicitud(usuario,usuarioConsultado));
+        usuarioConsultado.addSolicitud(new Solicitud(usuario, usuarioConsultado));
         JOptionPane.showMessageDialog(aThis, "Solicitud de amistad enviada a: " + usuarioConsultado.getAlias());
     }
 
-    public void verAmigosActionPerformed(Usuario usuario,Usuario usuarioConsultado, Perfil aThis) {
-        ListaAmigos lista = new ListaAmigos(usuario,usuarioConsultado);
+    public void verAmigosActionPerformed(Usuario usuario, Usuario usuarioConsultado, Perfil aThis) {
+        ListaAmigos lista = new ListaAmigos(usuario, usuarioConsultado);
         lista.setVisible(true);
         aThis.dispose();
     }
@@ -123,7 +133,7 @@ public class ControladorPerfil {
 
     public void desconectar(Perfil aThis) {
         new Login().setVisible(true);
-        aThis.dispose();   
+        aThis.dispose();
     }
-    
+
 }

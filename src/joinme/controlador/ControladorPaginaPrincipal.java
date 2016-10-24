@@ -5,8 +5,11 @@
  */
 package joinme.controlador;
 
+import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import joinme.GUI.ListaAmigos;
 import joinme.GUI.Login;
 import joinme.GUI.PagPrincipal;
@@ -76,16 +79,20 @@ public class ControladorPaginaPrincipal {
         List<Evento> eventos;
         
          for(Usuario amigo:amigos){
-            muro = GestorMuro.getInstance().getMuro(amigo);
-            eventos = muro.getEventos();
-            for(Evento e:eventos) {
-                if(e instanceof Entrada){
-                    entrada = (Entrada) e;
-                    if (!entrada.getVisibilidad().equals("Privado"))
-                        modelo.add(amigo.getAlias()+" - "+entrada.getFecha().getTime().toString()+" - "+entrada.getCategoria()+" - "+entrada.getVisibilidad()+" - "+entrada.getMensaje()+" - "+entrada.getMedia());
+            try {
+                muro = GestorMuro.getInstance().getMuro(amigo);
+                eventos = muro.getEventos();
+                for(Evento e:eventos) {
+                    if(e instanceof Entrada){
+                        entrada = (Entrada) e;
+                        if (!entrada.getVisibilidad().equals("Privado"))
+                            modelo.add(amigo.getAlias()+" - "+entrada.getFecha().getTime().toString()+" - "+entrada.getCategoria()+" - "+entrada.getVisibilidad()+" - "+entrada.getMensaje()+" - "+entrada.getMedia());
+                    }
+                    else
+                        modelo.add(amigo.getAlias()+" - "+e.getFecha().getTime().toString()+" - "+e.getMensaje());
                 }
-                else
-                    modelo.add(amigo.getAlias()+" - "+e.getFecha().getTime().toString()+" - "+e.getMensaje());
+            } catch (InvalidUserException ex) {
+                Logger.getLogger(ControladorPaginaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return modelo;
