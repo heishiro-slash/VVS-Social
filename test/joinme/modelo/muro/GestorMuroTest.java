@@ -41,7 +41,7 @@ public class GestorMuroTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws InvalidUserException, EmptyStringException {
         controlador = new ControladorLogin();
         controlador.creacionDatos("Eduardo");
         gestorMuro = GestorMuro.getInstance();
@@ -63,19 +63,22 @@ public class GestorMuroTest {
 
     /**
      * Test of getMuro method, of class GestorMuro.
+     * @throws exceptions.InvalidUserException
      */
     @Test(expected = InvalidUserException.class)
-    public void testGetMuro() {
+    public void testGetMuro() throws InvalidUserException {
         System.out.println("getMuro");
-        Usuario usuario = null;
-        Muro result = gestorMuro.getMuro(usuario);
+        Usuario usuarioEmpty = null;
+        gestorMuro.getMuro(usuarioEmpty);
     }
 
     /**
      * Test of publicarEntrada method, of class GestorMuro.
+     * @throws exceptions.InvalidUserException
+     * @throws exceptions.EmptyStringException
      */
     @Test(expected = EmptyStringException.class)
-    public void testPublicarEntrada_Usuario_String() {
+    public void testPublicarEntrada_Usuario_String() throws InvalidUserException, EmptyStringException {
         System.out.println("publicarEntrada");
         String mensaje = "";
         gestorMuro.publicarEntrada(usuario, mensaje);
@@ -83,9 +86,11 @@ public class GestorMuroTest {
 
     /**
      * Test of publicarEntrada method, of class GestorMuro.
+     * @throws exceptions.InvalidUserException
+     * @throws exceptions.EmptyStringException
      */
     @Test(expected = EmptyStringException.class)
-    public void testPublicarEntrada_5args() {
+    public void testPublicarEntrada_5args() throws InvalidUserException, EmptyStringException {
         System.out.println("publicarEntrada");
         String mensaje = "";
         String media = "";

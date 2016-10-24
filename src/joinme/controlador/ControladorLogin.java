@@ -5,6 +5,8 @@
  */
 package joinme.controlador;
 
+import exceptions.EmptyStringException;
+import exceptions.InvalidUserException;
 import javax.swing.JOptionPane;
 import joinme.GUI.FormularioRegistro;
 import joinme.GUI.Login;
@@ -41,7 +43,7 @@ public class ControladorLogin {
         aThis.dispose();
     }
 
-    public void creacionDatos(String usuarioDefecto){
+    public void creacionDatos(String usuarioDefecto) throws InvalidUserException, EmptyStringException{
         GestorUsuario gu = GestorUsuario.getInstance();
         if(!gu.existeUsuario(usuarioDefecto)) {
             Usuario uEduardo = gu.altaUsuario("Eduardo", "Gomez", "Gomez", usuarioDefecto, "05/01/78", "");
