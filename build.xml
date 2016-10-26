@@ -20,7 +20,8 @@ is divided into following sections:
 
 -->
 <project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" basedir="." default="default" name="ER-11-04-impl">
-    <fail message="Please build using Ant 1.8.0 or higher.">
+    
+	<fail message="Please build using Ant 1.8.0 or higher.">
         <condition>
             <not>
                 <antversion atleast="1.8.0"/>
@@ -28,7 +29,13 @@ is divided into following sections:
         </condition>
     </fail>
     <target depends="test,jar,javadoc" description="Build and test whole project." name="default"/>
-    <!-- 
+    <path id="classpath.test">
+		<pathelement location="lib/junit-4.12.jar" />
+		<!--<pathelement location="lib/hamcrest-core-1.3.jar" />-->
+		<pathelement location="${main.build.dir}"/>
+		<path refid="classpath.base" />
+	</path>
+  <!-- 
         ======================
         INITIALIZATION SECTION 
         ======================
