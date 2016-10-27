@@ -34,6 +34,11 @@ is divided into following sections:
         INITIALIZATION SECTION 
         ======================
     -->
+	<path id="class.path">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
     <target name="-pre-init">
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
@@ -273,6 +278,7 @@ is divided into following sections:
                             <include name="*"/>
                         </dirset>
                     </src>
+					<classpath refid="class.path" />
                     <classpath>
                         <path path="@{classpath}"/>
                     </classpath>
@@ -313,7 +319,8 @@ is divided into following sections:
                             <include name="*"/>
                         </dirset>
                     </src>
-                    <classpath>
+                    
+						<classpath refid="class.path" /><classpath>
                         <path path="@{classpath}"/>
                     </classpath>
                     <compilerarg line="${endorsed.classpath.cmd.line.arg}"/>
