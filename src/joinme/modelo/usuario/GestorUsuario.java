@@ -65,9 +65,9 @@ public class GestorUsuario {
     }
     
     public void aceptarSolicitud(Solicitud s) throws InvalidSolicitudException, InvalidUserException, EmptyStringException{
-    if(s == null){
-        throw new InvalidSolicitudException();
-    }
+        if(s == null){
+            throw new InvalidSolicitudException("Null solicitud");
+        }
         Usuario solicitado = s.getSolicitado();
         Usuario solicitante = s.getSolicitante();
         solicitado.aceptarSolicitud(s);
@@ -75,7 +75,10 @@ public class GestorUsuario {
         solicitante.registrarAmistad(solicitado);
     }
     
-    public void rechazarSolicitud(Solicitud s){
+    public void rechazarSolicitud(Solicitud s) throws InvalidSolicitudException{
+        if (s == null){
+            throw new InvalidSolicitudException("Null solicitud");
+        }
         Usuario solicitado = s.getSolicitado();
         solicitado.rechazarSolicitud(s);
     }

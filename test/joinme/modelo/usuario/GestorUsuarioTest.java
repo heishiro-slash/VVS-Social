@@ -224,14 +224,12 @@ public class GestorUsuarioTest {
      * Caso de prueba: PR-UN-014
      */
     @Test(expected = InvalidSolicitudException.class)
-    public void testRechazarSolicitud() {
+    public void testRechazarSolicitud() throws InvalidSolicitudException {
         try{
             controlador.creacionDatos ("Eduardo");
             System.out.println("rechazarSolicitud");
             Solicitud s = null;
             gestorUsuario.rechazarSolicitud(s);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
         } catch (InvalidUserException e) {
         } catch (EmptyStringException e) {
         }

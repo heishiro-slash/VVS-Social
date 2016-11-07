@@ -11,5 +11,25 @@ package exceptions;
  */
 public class InvalidSolicitudException extends Exception {
     
+    private String message = null;
+
+    public InvalidSolicitudException() {
+        super();
+    }
+
+    public InvalidSolicitudException(String message) {
+        super(message);
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
     
 }
