@@ -238,6 +238,7 @@ public class GestorUsuarioTest {
     /**
      * Test of verAmigos method, of class GestorUsuario.
      * Caso de prueba: PR-UN-015
+     * @throws exceptions.InvalidUserException
      */
     @Test(expected = InvalidUserException.class)
     public void testVerAmigosInvalidUser() throws InvalidUserException {
@@ -253,9 +254,10 @@ public class GestorUsuarioTest {
     /**
      * Test of verAmigos method, of class GestorUsuario.
      * Caso de prueba: PR-UN-016
+     * @throws exceptions.InvalidUserException
      */
     @Test
-    public void testVerAmigos() {
+    public void testVerAmigos() throws InvalidUserException {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("verAmigos");
@@ -267,7 +269,6 @@ public class GestorUsuarioTest {
             expResult.add(amigo2);
             List<Usuario> result = gestorUsuario.verAmigos(usuario);
             assertEquals(expResult, result);
-        } catch (InvalidUserException e) {
         } catch (EmptyStringException e) {
         }
     }
@@ -275,9 +276,10 @@ public class GestorUsuarioTest {
     /**
      * Test of verAmigos method, of class GestorUsuario.
      * Caso de prueba: PR-UN-017
+     * @throws exceptions.InvalidUserException
      */
     @Test
-    public void testVerAmigosSinAmigos() {
+    public void testVerAmigosSinAmigos() throws InvalidUserException {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("verAmigos");
@@ -285,7 +287,6 @@ public class GestorUsuarioTest {
             List<Usuario> expResult = new ArrayList();
             List<Usuario> result = gestorUsuario.verAmigos(usuario);
             assertEquals(expResult, result);
-        } catch (InvalidUserException e) {
         } catch (EmptyStringException e) {
         }
     }
@@ -293,6 +294,7 @@ public class GestorUsuarioTest {
     /**
      * Test of anadirAmigo method, of class GestorUsuario.
      * Caso de prueba: PR-UN-018
+     * @throws exceptions.InvalidUserException
      */
     @Test(expected = InvalidUserException.class)
     public void testAnadirAmigoUsuarioInvalido() throws InvalidUserException {
@@ -309,13 +311,14 @@ public class GestorUsuarioTest {
     /**
      * Test of anadirAmigo method, of class GestorUsuario.
      * Caso de prueba: PR-UN-019
+     * @throws exceptions.EmptyStringException
      */
     @Test(expected = EmptyStringException.class)
     public void testAnadirAmigoAliasInvalido() throws EmptyStringException {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("anadirAmigo");
-            Usuario usuario = null;
+            Usuario usuario = gestorUsuario.getUsuario("Eduardo");
             String alias = "";
             gestorUsuario.anadirAmigo(usuario, alias);
         } catch (InvalidUserException e) {

@@ -93,6 +93,13 @@ public class GestorUsuario {
     
     //Funcion solo necesaria para meter datos
     public void anadirAmigo(Usuario usuario, String alias) throws InvalidUserException, EmptyStringException{
+        if ( usuario == null ){
+            throw new InvalidUserException("Null User");
+        }
+        
+        if ( alias.equals("") ){
+            throw new EmptyStringException("Alias vacio");
+        }
         if(existeUsuario(alias)){
             Usuario amigo = getUsuario(alias);
             if(!usuario.esAmigo(amigo)){
