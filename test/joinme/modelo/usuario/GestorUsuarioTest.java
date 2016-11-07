@@ -240,12 +240,13 @@ public class GestorUsuarioTest {
      * Caso de prueba: PR-UN-015
      */
     @Test(expected = InvalidUserException.class)
-    public void testVerAmigosInvalidUser() throws InvalidUserException{
+    public void testVerAmigosInvalidUser() {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("verAmigos");
             Usuario usuario = null;
             gestorUsuario.verAmigos(usuario);
+        } catch (InvalidUserException e) {
         } catch (EmptyStringException e) {
         }            
     }
