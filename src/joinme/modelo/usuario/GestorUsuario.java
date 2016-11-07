@@ -83,7 +83,10 @@ public class GestorUsuario {
         solicitado.rechazarSolicitud(s);
     }
     
-    public List<Usuario> verAmigos(Usuario usuario){
+    public List<Usuario> verAmigos(Usuario usuario) throws InvalidUserException {
+        if (usuario == null){
+            throw new InvalidUserException("Null user");
+        }
         return usuario.getAmigos();
     }
     
