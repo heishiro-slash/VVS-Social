@@ -65,7 +65,9 @@ public class GestorUsuario {
     }
     
     public void aceptarSolicitud(Solicitud s) throws InvalidSolicitudException, InvalidUserException, EmptyStringException{
-    
+    if(s == null){
+        throw new InvalidSolicitudException();
+    }
         Usuario solicitado = s.getSolicitado();
         Usuario solicitante = s.getSolicitante();
         solicitado.aceptarSolicitud(s);
