@@ -38,7 +38,11 @@ public class GestorUsuario {
     
     
     public Usuario altaUsuario(String nombre, String apellido1, 
-            String apellido2, String alias, String fechaNac, String contraseña){
+            String apellido2, String alias, String fechaNac, String contraseña) throws EmptyStringException{
+        if(alias == "" || contraseña =="") {
+            throw new EmptyStringException();
+        }
+        
         Usuario u = new Usuario(nombre, apellido1, apellido2, alias, fechaNac, contraseña);
         usuarios.add(u);
         return u;

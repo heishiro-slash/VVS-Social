@@ -45,8 +45,7 @@ public class GestorUsuarioTest {
             controlador  = new ControladorLogin();
             gestorUsuario = GestorUsuario.getInstance();
             controlador.creacionDatos ("Eduardo");
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }
     
@@ -89,24 +88,24 @@ public class GestorUsuarioTest {
             expResult.add(gestorUsuario.getUsuario("Jose"));
             List<Usuario> result = gestorUsuario.getUsuarios();
             assertEquals(expResult, result);
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }
     
     /**
      * Test of altaUsuario method, of class GestorUsuario.
+     * @throws exceptions.EmptyStringException
      */
     @Test (expected = EmptyStringException.class)
     public void testAltaUsuarioEmpty() throws EmptyStringException {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("altaUsuario");
-            String nombre = "";
-            String apellido1 = "";
-            String apellido2 = "";
+            String nombre = "Jose";
+            String apellido1 = "Ape1";
+            String apellido2 = "Ape2";
             String alias = "";
-            String fechaNac = "";
+            String fechaNac = "17021988";
             String contraseña = "";
             gestorUsuario.altaUsuario(nombre, apellido1, apellido2, alias, fechaNac, contraseña);
         } catch (InvalidUserException e) {
@@ -115,6 +114,7 @@ public class GestorUsuarioTest {
 
     /**
      * Test of getUsuario method, of class GestorUsuario.
+     * @throws exceptions.EmptyStringException
      */
     @Test (expected = EmptyStringException.class)
     public void testGetUsuario() throws EmptyStringException {
@@ -143,14 +143,14 @@ public class GestorUsuarioTest {
             alias = "Pepito";
             result = gestorUsuario.existeUsuario(alias);
             assertFalse(result);
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }  
 
     /**
      * Test of buscarUsuario method, of class GestorUsuario.
      * Caso de prueba: PR-UN-011
+     * @throws exceptions.EmptyStringException
      */
     @Test (expected = EmptyStringException.class)
     public void testBuscarUsuarioEmpty() throws EmptyStringException {
@@ -178,8 +178,7 @@ public class GestorUsuarioTest {
             expResult.add(user);
             List<Usuario> result = gestorUsuario.buscarUsuario(nombre, ap1, ap2);
             assertEquals(expResult, result);
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }
     
@@ -198,14 +197,14 @@ public class GestorUsuarioTest {
             List<Usuario> expResult= new ArrayList();
             List<Usuario> result = gestorUsuario.buscarUsuario(nombre, ap1, ap2);
             assertEquals(expResult, result);
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }
 
     /**
      * Test of aceptarSolicitud method, of class GestorUsuario.
      * Caso de prueba: PR-UN-013
+     * @throws exceptions.InvalidSolicitudException
      */
     @Test(expected = InvalidSolicitudException.class)
     public void testAceptarSolicitud() throws InvalidSolicitudException {
@@ -214,14 +213,14 @@ public class GestorUsuarioTest {
             System.out.println("aceptarSolicitud");
             Solicitud s = null;
             gestorUsuario.aceptarSolicitud(s);
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }
 
     /**
      * Test of rechazarSolicitud method, of class GestorUsuario.
      * Caso de prueba: PR-UN-014
+     * @throws exceptions.InvalidSolicitudException
      */
     @Test(expected = InvalidSolicitudException.class)
     public void testRechazarSolicitud() throws InvalidSolicitudException {
@@ -230,8 +229,7 @@ public class GestorUsuarioTest {
             System.out.println("rechazarSolicitud");
             Solicitud s = null;
             gestorUsuario.rechazarSolicitud(s);
-        } catch (InvalidUserException e) {
-        } catch (EmptyStringException e) {
+        } catch (InvalidUserException | EmptyStringException e) {
         }
     }
     
