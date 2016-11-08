@@ -5,6 +5,7 @@
  */
 package joinme.controlador;
 
+import exceptions.InvalidUserException;
 import java.util.List;
 import joinme.GUI.ListaAmigos;
 import joinme.GUI.Perfil;
@@ -16,25 +17,33 @@ import joinme.modelo.usuario.Usuario;
  * @author esteban
  */
 public class ControladorListaAmigos {
+
     GestorUsuario gu = GestorUsuario.getInstance();
+
     public ControladorListaAmigos() {
-        
+
     }
-    
+
     public void getPerfil(Usuario usuario, Usuario usuarioConsultado, ListaAmigos aThis) {
-        Perfil perfil = new Perfil(usuario,usuarioConsultado);
+        Perfil perfil = new Perfil(usuario, usuarioConsultado);
         perfil.setVisible(true);
         aThis.dispose();
     }
 
     public void verAmigos(Usuario usuario, String valor, ListaAmigos aThis) {
-        Usuario u =gu.getUsuario(valor);
-        Perfil perfil = new Perfil(usuario,u);
+        Usuario u = gu.getUsuario(valor);
+        Perfil perfil = new Perfil(usuario, u);
         perfil.setVisible(true); // muestra la ventana de PagPrincipal
-        aThis.dispose();}
+        aThis.dispose();
+    }
 
     public List<Usuario> getAmigos(Usuario usuarioConsultado) {
-        return gu.verAmigos(usuarioConsultado);
+        try {
+            return gu.verAmigos(usuarioConsultado);
+        } catch (InvalidUserException e) {
+            return null;
+        }
+
     }
 
     public Object getAlias(Usuario u) {

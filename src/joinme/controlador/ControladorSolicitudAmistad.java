@@ -79,8 +79,12 @@ public class ControladorSolicitudAmistad {
         for (Solicitud solicitud : s) {
             if (solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
                 if (solicitud.getEstado().equals("Pendiente")) {
-                    GestorUsuario.getInstance().rechazarSolicitud(solicitud);
-                    //solicitud.setEstado("Rechazada");
+                    try {
+                        GestorUsuario.getInstance().rechazarSolicitud(solicitud);
+                        //solicitud.setEstado("Rechazada");
+                    } catch (InvalidSolicitudException e) {
+                        
+                    }
                 }
             }
         }
