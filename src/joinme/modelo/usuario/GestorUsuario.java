@@ -48,9 +48,12 @@ public class GestorUsuario {
         return u;
     }
     
-    public Usuario getUsuario(String Alias){
+    public Usuario getUsuario(String alias) throws EmptyStringException{
+        if(alias == ""){
+            throw new EmptyStringException ();
+        }
         for(Usuario u: usuarios){
-            if(u.getAlias().equals(Alias))
+            if(u.getAlias().equals(alias))
                 return u;
         }
         return null;
