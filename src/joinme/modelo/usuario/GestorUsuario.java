@@ -66,7 +66,12 @@ public class GestorUsuario {
         return false;
     }
     
-    public List<Usuario> buscarUsuario(String nombre, String ap1, String ap2){
+    public List<Usuario> buscarUsuario(String nombre, String ap1, String ap2) throws EmptyStringException{
+        if((nombre.equals("") && ap1.equals("")) && ap2.equals("")){
+            throw new EmptyStringException();
+        } else {
+        }
+        
         List<Usuario> listaUsuarios = null;
         return listaUsuarios;
     }
@@ -113,5 +118,9 @@ public class GestorUsuario {
                 usuario.registrarAmistad(getUsuario(alias));        
             }
         }
+    }
+
+    private void EmptyStringException() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
