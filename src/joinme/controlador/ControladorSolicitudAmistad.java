@@ -77,20 +77,24 @@ public class ControladorSolicitudAmistad {
         }
     }
 
-    public void rechazarSolicitud(Usuario usuario, String solicitudSeleccionada) throws EmptyStringException {
-        Usuario u = GestorUsuario.getInstance().getUsuario(usuario.getAlias());
-        List<Solicitud> s = u.getSolicitudes();
-        for (Solicitud solicitud : s) {
-            if (solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
-                if (solicitud.getEstado().equals("Pendiente")) {
-                    try {
-                        GestorUsuario.getInstance().rechazarSolicitud(solicitud);
-                        //solicitud.setEstado("Rechazada");
-                    } catch (InvalidSolicitudException e) {
-                        
+    public void rechazarSolicitud(Usuario usuario, String solicitudSeleccionada) {
+        try {
+            Usuario u = GestorUsuario.getInstance().getUsuario(usuario.getAlias());
+            List<Solicitud> s = u.getSolicitudes();
+            for (Solicitud solicitud : s) {
+                if (solicitud.getSolicitante().getAlias().equals(solicitudSeleccionada)) {
+                    if (solicitud.getEstado().equals("Pendiente")) {
+                        try {
+                            GestorUsuario.getInstance().rechazarSolicitud(solicitud);
+                            //solicitud.setEstado("Rechazada");
+                        } catch (InvalidSolicitudException e) {
+                            
+                        }
                     }
                 }
             }
+        } catch (EmptyStringException ex) {
+            Logger.getLogger(ControladorSolicitudAmistad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
