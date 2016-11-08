@@ -192,8 +192,8 @@ public class GestorUsuarioTest {
             controlador.creacionDatos ("Eduardo");
             System.out.println("buscarUsuarioNoExistente");
             String nombre = "Pepito";
-            String ap1 = "Gomez";
-            String ap2 = "Gomez";
+            String ap1 = "Gomezin";
+            String ap2 = "Gomezin";
             List<Usuario> expResult= new ArrayList();
             List<Usuario> result = gestorUsuario.buscarUsuario(nombre, ap1, ap2);
             assertEquals(expResult, result);

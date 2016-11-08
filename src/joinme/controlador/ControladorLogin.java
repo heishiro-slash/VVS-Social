@@ -52,11 +52,11 @@ public class ControladorLogin {
     public void creacionDatos(String usuarioDefecto) throws InvalidUserException, EmptyStringException{
         GestorUsuario gu = GestorUsuario.getInstance();
         if(!gu.existeUsuario(usuarioDefecto)) {
-            Usuario uEduardo = gu.altaUsuario("Eduardo", "Gomez", "Gomez", usuarioDefecto, "05/01/78", "");
-            Usuario uEsteban = gu.altaUsuario("Esteban", "Abanqueiro", "Agrelo", "Aba", "05/03/89", "");
-            Usuario uVictor = gu.altaUsuario("Victor", "Blanco", "", "Victor", "10/03/89", "");
-            Usuario uFaustino = gu.altaUsuario("Faustino", "Castro", "", "Tino", "20/03/89", "");
-            Usuario uJose = gu.altaUsuario("Jose", "Miguel", "del Rio", "Jose", "16/03/89", "");
+            Usuario uEduardo = gu.altaUsuario("Eduardo", "Gomez", "Gomez", usuarioDefecto, "05/01/78", "1234");
+            Usuario uEsteban = gu.altaUsuario("Esteban", "Abanqueiro", "Agrelo", "Aba", "05/03/89", "1234");
+            Usuario uVictor = gu.altaUsuario("Victor", "Blanco", "", "Victor", "10/03/89", "1234");
+            Usuario uFaustino = gu.altaUsuario("Faustino", "Castro", "", "Tino", "20/03/89", "1234");
+            Usuario uJose = gu.altaUsuario("Jose", "Miguel", "del Rio", "Jose", "16/03/89", "1234");
             uEsteban.registrarAmistad(uVictor);
             uEsteban.registrarAmistad(uFaustino);
             uEsteban.registrarAmistad(uJose);
