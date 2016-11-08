@@ -5,8 +5,11 @@
  */
 package joinme.controlador;
 
+import exceptions.EmptyStringException;
 import exceptions.InvalidUserException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import joinme.GUI.ListaAmigos;
 import joinme.GUI.Perfil;
 import joinme.modelo.usuario.GestorUsuario;
@@ -31,10 +34,14 @@ public class ControladorListaAmigos {
     }
 
     public void verAmigos(Usuario usuario, String valor, ListaAmigos aThis) {
-        Usuario u = gu.getUsuario(valor);
-        Perfil perfil = new Perfil(usuario, u);
-        perfil.setVisible(true); // muestra la ventana de PagPrincipal
-        aThis.dispose();
+        try {
+            Usuario u = gu.getUsuario(valor);
+            Perfil perfil = new Perfil(usuario, u);
+            perfil.setVisible(true); // muestra la ventana de PagPrincipal
+            aThis.dispose();
+        } catch (EmptyStringException ex) {
+            Logger.getLogger(ControladorListaAmigos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Usuario> getAmigos(Usuario usuarioConsultado) {

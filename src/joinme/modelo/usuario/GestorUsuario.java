@@ -67,12 +67,15 @@ public class GestorUsuario {
     }
     
     public List<Usuario> buscarUsuario(String nombre, String ap1, String ap2) throws EmptyStringException{
+        List<Usuario> listaUsuarios = new ArrayList();
         if((nombre.equals("") && ap1.equals("")) && ap2.equals("")){
             throw new EmptyStringException();
-        } else {
+        }  
+        for(Usuario u: usuarios){
+            if(u.getNombre().equals(nombre)|| u.getApellido1().equals(ap1)|| u.getApellido2().equals(ap2)){
+                listaUsuarios.add(u);
+            }
         }
-        
-        List<Usuario> listaUsuarios = null;
         return listaUsuarios;
     }
     

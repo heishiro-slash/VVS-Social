@@ -7,6 +7,8 @@ package joinme.controlador;
 
 import exceptions.EmptyStringException;
 import exceptions.InvalidUserException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import joinme.GUI.FormularioRegistro;
 import joinme.GUI.Login;
@@ -29,9 +31,13 @@ public class ControladorLogin {
        GestorUsuario gu = GestorUsuario.getInstance();
               
         if (usuario.equals(usuarioDefecto)||gu.existeUsuario(usuario)){
-            PagPrincipal principal = new PagPrincipal(gu.getUsuario(usuario));
-            principal.setVisible(true);
-            aThis.dispose();
+           try {
+               PagPrincipal principal = new PagPrincipal(gu.getUsuario(usuario));
+               principal.setVisible(true);
+               aThis.dispose();
+           } catch (EmptyStringException ex) {
+               Logger.getLogger(ControladorLogin.class.getName()).log(Level.SEVERE, null, ex);
+           }
         } else {
             JOptionPane.showMessageDialog(aThis, "usuario incorrecto");
         }

@@ -5,6 +5,7 @@
  */
 package joinme.controlador;
 
+import exceptions.EmptyStringException;
 import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,10 +116,14 @@ public class ControladorPaginaPrincipal {
     }
 
     public void getPerfil(String alias, Usuario usuario, PagPrincipal aThis) {
-        Usuario u = GestorUsuario.getInstance().getUsuario(alias);
-        Perfil perfil = new Perfil(usuario,u);
-        perfil.setVisible(true);
-        aThis.dispose();
+        try {
+            Usuario u = GestorUsuario.getInstance().getUsuario(alias);
+            Perfil perfil = new Perfil(usuario,u);
+            perfil.setVisible(true);
+            aThis.dispose();
+        } catch (EmptyStringException ex) {
+            Logger.getLogger(ControladorPaginaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void getSolicitudes(Usuario usuario, PagPrincipal aThis) {
