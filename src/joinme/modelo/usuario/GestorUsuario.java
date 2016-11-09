@@ -35,6 +35,9 @@ public class GestorUsuario {
         return usuarios;
     }
     
+    public void deleteUsers(){
+        usuarios.clear();
+    }
     
     
     public Usuario altaUsuario(String nombre, String apellido1, 

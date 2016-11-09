@@ -41,16 +41,14 @@ public class GestorUsuarioTest {
    
     @Before
     public void setUp() {
-        try {
             controlador  = new ControladorLogin();
             gestorUsuario = GestorUsuario.getInstance();
-            controlador.creacionDatos ("Eduardo");
-        } catch (InvalidUserException | EmptyStringException e) {
-        }
     }
     
     @After
     public void tearDown() {
+        
+        gestorUsuario.deleteUsers();
     }
 
     /**
@@ -84,6 +82,7 @@ public class GestorUsuarioTest {
             List<Usuario> expResult = new ArrayList();
             expResult.add(gestorUsuario.getUsuario("Eduardo"));
             expResult.add(gestorUsuario.getUsuario("Aba"));
+            expResult.add(gestorUsuario.getUsuario("Victor"));
             expResult.add(gestorUsuario.getUsuario("Tino"));
             expResult.add(gestorUsuario.getUsuario("Jose"));
             List<Usuario> result = gestorUsuario.getUsuarios();
