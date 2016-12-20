@@ -12,7 +12,7 @@ import joinme.GUI.Login;
  *
  * @author esteban
  */
-public class joinme {
+public class Joinme {
         public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
