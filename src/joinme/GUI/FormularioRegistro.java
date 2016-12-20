@@ -12,7 +12,7 @@ import joinme.controlador.ControladorRegistro;
  * @author esteban
  */
 public class FormularioRegistro extends javax.swing.JFrame {
-    private ControladorRegistro controlador;
+    private final ControladorRegistro controlador;
     /**
      * Creates new form FormularioRegistro
      */
@@ -142,12 +142,12 @@ public class FormularioRegistro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistroActionPerformed
-        String nombre=new String(jTextFieldName.getText());
-        String ap1=new String(jTextFieldAp1.getText());
-        String ap2=new String(jTextFieldAp2.getText());
-        String alias=new String(jTextFieldAlias.getText());
-        String fecNac=new String(jTextFieldFechaNac.getText());
-        String pass=new String(jTextFieldPass.getText());
+        String nombre = jTextFieldName.getText();
+        String ap1= jTextFieldAp1.getText();
+        String ap2= jTextFieldAp2.getText();
+        String alias= jTextFieldAlias.getText();
+        String fecNac= jTextFieldFechaNac.getText();
+        String pass= jTextFieldPass.getText();
         
         controlador.registrar(alias, nombre, ap1, ap2, fecNac, pass, this);
     }//GEN-LAST:event_jButtonRegistroActionPerformed

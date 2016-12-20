@@ -17,15 +17,18 @@ import joinme.modelo.usuario.Usuario;
 public class ListaAmigos extends javax.swing.JFrame {
     private static Usuario usuario;
     private static Usuario usuarioConsultado;
-    private ControladorListaAmigos controlador;
+    private final ControladorListaAmigos controlador;
     
+    private static void setUsuario (Usuario usuario){
+        ListaAmigos.usuario = usuario;
+    }
     
     /**
      * Creates new form ListaAmigos
      */
     public ListaAmigos(Usuario usuario, Usuario usuarioConsultado) {
         controlador = new ControladorListaAmigos();
-        this.usuario = usuario;
+        setUsuario(usuario);
         this.usuarioConsultado = usuarioConsultado;
         initComponents();
         init();
@@ -67,7 +70,7 @@ public class ListaAmigos extends javax.swing.JFrame {
         });
         jListAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                VerAmigos(evt);
+                verAmigos(evt);
             }
         });
         jScrollPane1.setViewportView(jListAmigos);
@@ -113,10 +116,10 @@ public class ListaAmigos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void VerAmigos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerAmigos
+    private void verAmigos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verAmigos
         String valor = (String) jListAmigos.getSelectedValue();
         controlador.verAmigos(usuario, valor, this);
-    }//GEN-LAST:event_VerAmigos
+    }//GEN-LAST:event_verAmigos
 
     private void jVolverPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVolverPerfilActionPerformed
         controlador.getPerfil(usuario, usuarioConsultado, this);

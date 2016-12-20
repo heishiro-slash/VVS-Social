@@ -126,7 +126,7 @@ public class GestorUsuario {
         }
     }
 
-    private void EmptyStringException() {
+    private void emptyStringException() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
