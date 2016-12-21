@@ -7,9 +7,11 @@ package joinme.modelo.muro;
 
 import exceptions.EmptyStringException;
 import exceptions.InvalidUserException;
+import java.util.Calendar;
 import joinme.controlador.ControladorLogin;
 import joinme.modelo.usuario.GestorUsuario;
 import joinme.modelo.usuario.Usuario;
+import org.jcheck.annotations.Configuration;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,6 +25,7 @@ import org.junit.runner.RunWith;
  * @author Admin
  */
 @RunWith(org.jcheck.runners.JCheckRunner.class)
+@Configuration(tests=10, size=10)
 public class GestorMuroTest {
 
     private ControladorLogin controlador;
@@ -88,18 +91,85 @@ public class GestorMuroTest {
 
     /**
      * Test of publicarEntrada method, of class GestorMuro.
+     * @param m Media
+     * @param c Categoria
+     * @param v Visibilidad
      * @throws exceptions.InvalidUserException
      * @throws exceptions.EmptyStringException
      */
     @Test(expected = EmptyStringException.class)
-    public void testPublicarEntrada_5args() throws InvalidUserException, EmptyStringException {
+    public void testPublicarEntrada_5args(String m, String c, String v) throws InvalidUserException, EmptyStringException {
         System.out.println("publicarEntrada");
-        String mensaje = "";
-        String media = "";
-        String categoria = "";
-        String visibilidad = "";
-        gestorMuro.publicarEntrada(usuario, mensaje, media, categoria, visibilidad);
-
+        gestorMuro.publicarEntrada(usuario, "", m, c, v);
+    }
+    /**
+     * Test of publicarEntrada method, of class GestorMuro.
+     * @param men Mensaje
+     * @param m Media
+     * @param v Visibilidad
+     * @throws exceptions.InvalidUserException
+     * @throws exceptions.EmptyStringException
+     */
+    @Test(expected = EmptyStringException.class)
+    public void testPublicarEntrada_5args2(String men, String m, String v) throws InvalidUserException, EmptyStringException {
+        System.out.println("publicarEntrada");
+        gestorMuro.publicarEntrada(usuario, men, m, "", v);
+    }
+    
+    /**
+     * Test of publicarEntrada method, of class GestorMuro.
+     * @param men Mensaje
+     * @param m Media
+     * @param c Categoria
+     * @throws exceptions.InvalidUserException
+     * @throws exceptions.EmptyStringException
+     */
+    @Test(expected = EmptyStringException.class)
+    public void testPublicarEntrada_5args3(String men, String m, String c) throws InvalidUserException, EmptyStringException {
+        System.out.println("publicarEntrada");
+        gestorMuro.publicarEntrada(usuario, men, m, c, "");
+    }
+    
+    /**
+     * Test of GetEventos method, of class GestorMuro.
+     * @param i dias a añadir
+     * @param add añadir al mensaje
+     * @throws exceptions.InvalidUserException
+     */
+    @Test
+    public void testEventos(int i, String add) throws InvalidUserException{
+        System.out.println("Eventos");
+        Muro muro = gestorMuro.getMuro(usuario);
+        assertTrue(muro.getEventos() != null);
+        Evento e = muro.getEventos().get(0);
+        Calendar d = e.getFecha();
+        d.add(Calendar.DAY_OF_MONTH, i);
+        e.setFecha(d);
+        assertTrue(e.getFecha().equals(d));
+        String m = e.getMensaje();
+        m += m+add;
+        e.setMensaje(m);
+        assertTrue(e.getMensaje().equals(m));
+    }
+    
+    /**
+     * Test of GetEventos method, of class GestorMuro.
+     * @param men Mensaje
+     * @param c Categoria
+     * @param m Media
+     * @param v Visibilidad
+     * @throws exceptions.InvalidUserException
+     */
+    @Test
+    public void testEntrada(String men, String c, String m, String v) throws InvalidUserException{
+        System.out.println("Entrada");
+        Entrada e = new Entrada(men);
+        e.setCategoria(c);
+        e.setMedia(m);
+        e.setVisibilidad(v);
+        assertTrue(c.equals(e.getCategoria()));
+        assertTrue(m.equals(e.getMedia()));
+        assertTrue(v.equals(e.getVisibilidad()));
     }
     
 }

@@ -12,6 +12,9 @@ public class Entrada extends Evento{
     private String categoria;
     private String visibilidad;
 
+    public Entrada(String mensaje){
+        super(mensaje);
+    }
     public Entrada(String mensaje, String media, String categoria, String visibilidad) {
         super(mensaje);
         this.media = media;
