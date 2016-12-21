@@ -98,8 +98,6 @@ public class Usuario {
     
     //FINAL GETTERS Y SETTERS
     
-    public void comprobarAcceso(){   
-    }
     
     public void registrarAmistad(Usuario usuario) throws InvalidUserException, EmptyStringException{
         GestorMuro.getInstance().publicarEntrada(this, alias + " ahora es amigo de " + usuario.getAlias());

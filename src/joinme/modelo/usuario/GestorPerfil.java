@@ -10,5 +10,15 @@ package joinme.modelo.usuario;
  * @author esteban
  */
 public class GestorPerfil {
+    private static GestorPerfil instancePerfil;
     
+     private GestorPerfil() {
+    }
+    
+    public static GestorPerfil getInstance(){
+        if(instancePerfil == null){
+            instancePerfil = new GestorPerfil();
+        }
+        return instancePerfil;
+    }
 }
