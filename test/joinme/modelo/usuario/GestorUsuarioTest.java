@@ -11,6 +11,7 @@ import exceptions.InvalidUserException;
 import java.util.ArrayList;
 import java.util.List;
 import joinme.controlador.ControladorLogin;
+import org.jcheck.annotations.Configuration;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,6 +25,7 @@ import org.junit.runner.RunWith;
  * @author Admin
  */
 @RunWith(org.jcheck.runners.JCheckRunner.class)
+@Configuration(tests=10, size=10)
 public class GestorUsuarioTest {
     
     private ControladorLogin controlador;
