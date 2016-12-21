@@ -16,11 +16,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author Admin
  */
+@RunWith(org.jcheck.runners.JCheckRunner.class)
 public class GestorMuroTest {
 
     private ControladorLogin controlador;
@@ -99,5 +101,5 @@ public class GestorMuroTest {
         gestorMuro.publicarEntrada(usuario, mensaje, media, categoria, visibilidad);
 
     }
-
+    
 }

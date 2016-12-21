@@ -17,11 +17,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author Admin
  */
+@RunWith(org.jcheck.runners.JCheckRunner.class)
 public class GestorUsuarioTest {
     
     private ControladorLogin controlador;
@@ -93,20 +95,18 @@ public class GestorUsuarioTest {
     
     /**
      * Test of altaUsuario method, of class GestorUsuario.
+     * @param n nombre
+     * @param ap1 Apellido 1
+     * @param ap2 Apellido 2
+     * @param fn fecha nacimiento *String
      * @throws exceptions.EmptyStringException
      */
     @Test (expected = EmptyStringException.class)
-    public void testAltaUsuarioEmpty() throws EmptyStringException {
+    public void testAltaUsuarioEmpty(String n, String ap1, String ap2, String fn) throws EmptyStringException {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("altaUsuario");
-            String nombre = "Jose";
-            String apellido1 = "Ape1";
-            String apellido2 = "Ape2";
-            String alias = "";
-            String fechaNac = "17021988";
-            String contraseña = "";
-            gestorUsuario.altaUsuario(nombre, apellido1, apellido2, alias, fechaNac, contraseña);
+            gestorUsuario.altaUsuario(n, ap1, ap2, "", fn, "");
         } catch (InvalidUserException e) {
         }
     }   
@@ -130,17 +130,17 @@ public class GestorUsuarioTest {
 
     /**
      * Test of existeUsuario method, of class GestorUsuario.
+     * @param a Alias
      */
     @Test
-    public void testExisteUsuario() {
+    public void testExisteUsuario(String a) {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("existeUsuario");
             String alias = "Eduardo";
             boolean result = gestorUsuario.existeUsuario(alias);
             assertTrue(result);
-            alias = "Pepito";
-            result = gestorUsuario.existeUsuario(alias);
+            result = gestorUsuario.existeUsuario(a);
             assertFalse(result);
         } catch (InvalidUserException | EmptyStringException e) {
         }
@@ -184,17 +184,17 @@ public class GestorUsuarioTest {
     /**
      * Test of buscarUsuario method, of class GestorUsuario.
      * Caso de prueba: PR-UN-012
+     * @param n nombre
+     * @param ap1 apellido1
+     * @param ap2 apellido2
      */
     @Test
-    public void testBuscarUsuarioNoExistente() {
+    public void testBuscarUsuarioNoExistente(String n, String ap1, String ap2) {
         try {
             controlador.creacionDatos ("Eduardo");
             System.out.println("buscarUsuarioNoExistente");
-            String nombre = "Pepito";
-            String ap1 = "Gomezin";
-            String ap2 = "Gomezin";
             List<Usuario> expResult= new ArrayList();
-            List<Usuario> result = gestorUsuario.buscarUsuario(nombre, ap1, ap2);
+            List<Usuario> result = gestorUsuario.buscarUsuario("Eduarda", "Gomeza", "Gomeza");
             assertEquals(expResult, result);
         } catch (InvalidUserException | EmptyStringException e) {
         }
