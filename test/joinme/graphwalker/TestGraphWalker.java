@@ -12,7 +12,8 @@ package joinme.graphwalker;
 public class TestGraphWalker {
     /*Debido a falta de tiempo no ha sido posible implementar este test generado con GraphWalker
     $ gw3 offline -m Login.graphml "random(edge_coverage(100))"*/
-
+    public TestGraphWalker(){}
+    
  /*
     {"currentElementName":"e_init"}
 {"currentElementName":"v_UserNotInSession"}
